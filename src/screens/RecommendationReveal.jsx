@@ -7,7 +7,7 @@ const RecommendationReveal = ({ recommendation, onViewMap, onBack }) => {
     useEffect(() => {
         if (recommendation?.photos && recommendation.photos.length > 0) {
             const reference = recommendation.photos[0].reference;
-            fetch(`http://localhost:5000/api/places/photo/${reference}?maxwidth=800`)
+            fetch(`${import.meta.env.VITE_API_URL}/api/places/photo/${reference}?maxwidth=800`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.success) {

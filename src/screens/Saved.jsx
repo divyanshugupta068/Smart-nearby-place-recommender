@@ -23,7 +23,7 @@ const Saved = () => {
     };
 
     const getPhotoUrl = (photoReference) => {
-        return `http://localhost:5000/api/places/photo/${photoReference}?maxwidth=400`;
+        return `${import.meta.env.VITE_API_URL}/api/places/photo/${photoReference}?maxwidth=400`;
     };
 
     const getDirections = (place) => {

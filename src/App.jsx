@@ -62,7 +62,7 @@ function App() {
 
                     // Fetch places from backend
                     try {
-                        const response = await fetch('http://localhost:5000/api/places/nearby', {
+                        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/places/nearby`, {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
@@ -86,7 +86,7 @@ function App() {
                             setCurrentScreen('home');
                         } else {
                             // If no places found with filters, try again with relaxed filters
-                            const fallbackResponse = await fetch('http://localhost:5000/api/places/nearby', {
+                            const fallbackResponse = await fetch(`${import.meta.env.VITE_API_URL}/api/places/nearby`, {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
                                 body: JSON.stringify({

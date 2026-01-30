@@ -57,7 +57,7 @@ const Home = ({ onExploreMore, initialPlaces, activeVibe }) => {
             try {
                 // Reverse geocode via backend if name is not provided
                 if (!name) {
-                    const geoRes = await fetch(`http://localhost:5000/api/places/reverse-geocode?lat=${lat}&lng=${lng}`);
+                    const geoRes = await fetch(`${import.meta.env.VITE_API_URL}/api/places/reverse-geocode?lat=${lat}&lng=${lng}`);
                     const geoData = await geoRes.json();
                     if (geoData.success) {
                         setLocationName(geoData.city);
@@ -68,7 +68,7 @@ const Home = ({ onExploreMore, initialPlaces, activeVibe }) => {
                     setLocationName(name);
                 }
 
-                const response = await fetch('http://localhost:5000/api/places/nearby', {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/places/nearby`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -123,7 +123,7 @@ const Home = ({ onExploreMore, initialPlaces, activeVibe }) => {
             setIsSearchingLocation(false);
             setLoading(true);
             try {
-                const res = await fetch(`http://localhost:5000/api/places/geocode?city=${encodeURIComponent(searchCity)}`);
+                const res = await fetch(`${import.meta.env.VITE_API_URL}/api/places/geocode?city=${encodeURIComponent(searchCity)}`);
                 const data = await res.json();
                 if (data.success) {
                     fetchPlaces({ latitude: data.latitude, longitude: data.longitude, name: data.address.split(',')[0] });
@@ -140,7 +140,7 @@ const Home = ({ onExploreMore, initialPlaces, activeVibe }) => {
 
     const fetchRestaurantDetails = async (placeId) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/places/details/${placeId}`);
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/places/details/${placeId}`);
             const data = await response.json();
             if (data.success) {
                 setRestaurantDetails(data.place);
@@ -156,7 +156,7 @@ const Home = ({ onExploreMore, initialPlaces, activeVibe }) => {
     };
 
     const getPhotoUrl = (photoReference) => {
-        return `http://localhost:5000/api/places/photo/${photoReference}?maxwidth=1000`;
+        return `${import.meta.env.VITE_API_URL}/api/places/photo/${photoReference}?maxwidth=1000`;
     };
 
     const savePlace = (place) => {
